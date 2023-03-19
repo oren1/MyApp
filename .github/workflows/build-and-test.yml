@@ -1,0 +1,39 @@
+name: build-and-test
+run-name: ${{ github.actor }} building and testing
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Cache CocoaPods
+        id: cache-cocoapods
+        uses: actions/cache@v3
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-  
+            
+      - run: npm ci --legacy-peer-deps
+      - run: npm install detox-cli --global
+      - run: brew tap wix/brew
+      - run: brew install applesimutils
+      - run: "npm install react-native-cli --global"
+      - run: npm install "jest@^29" --save-dev --legacy-peer-deps
+      - run: npm install detox --save-dev --legacy-peer-deps
+      
+      - name: install pods
+        if: steps.cache-cocoapods.outputs.cache-hit != 'true'
+        run: cd ios && pod install && cd ../
+        
+            
+      - run: npx react-native start --sourceExts mock.js,js,json,ts,tsx &
+      - run: detox build --configuration ios.sim.debug
+      - run: detox test --configuration ios.sim.debug --cleanup
+
+
