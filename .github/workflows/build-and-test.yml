@@ -32,8 +32,8 @@ jobs:
         run: cd ios && pod install && cd ../
         
             
-      - run: npx react-native start --sourceExts mock.js,js,json,ts,tsx &
-      - run: detox build --configuration ios.sim.debug
-      - run: detox test --configuration ios.sim.debug --cleanup
+      - run: npx react-native start
+      - run: detox build --configuration ios.sim.release
+      - run: export MY_APP_MODE=mocked && detox test --configuration ios.sim.release --cleanup
 
 
