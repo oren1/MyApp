@@ -16,11 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.5' # Not needed with a .ruby-version file
-          bundler-cache: true #
-      - run: bundle install    
+      - run: brew install fastlane
       - name: Deploy iOS Beta to TestFlight via Fastlane
         uses: maierj/fastlane-action@v3.0.0
         with:
