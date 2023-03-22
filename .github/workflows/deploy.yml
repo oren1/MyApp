@@ -1,4 +1,4 @@
-name: Deploy
+name: CD
 on:
   push:
     branches: [ main ]
@@ -16,14 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.5' # Not needed with a .ruby-version file
-          bundler-cache: true #
-      - run: bundle install
-      - run: sudo gem install fastlane
+
       - name: Deploy iOS Beta to TestFlight via Fastlane
-        uses: maierj/fastlane-action@v3.0.0
+        uses: maierj/fastlane-action@v1.4.0
         with:
           lane: closed_beta
         env:
