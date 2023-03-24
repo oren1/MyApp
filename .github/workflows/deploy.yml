@@ -12,7 +12,7 @@ jobs:
          with:
            node-version: '16'
        - name: upload to testflight 
-         run: fastlane beta
+         run: cd ios && fastlane beta
          env:
             KEY_ID: ${{ secrets.KEY_ID }}
             ISSUER_ID: ${{ secrets.ISSUER_ID }}
