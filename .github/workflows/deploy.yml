@@ -7,5 +7,10 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - run: echo 'Hi ${{ vars.EXAMPLE_VARIABLE }}'
-      - run: echo 'Hi ${{ secrets.DEVELOPER_APP_IDENTIFIER }}'
+      - run: fastlane beta
+      - env:
+          KEY_ID: ${{ secrets.KEY_ID }}
+          ISSUER_ID: ${{ secrets.ISSUER_ID }}
+          KEY_CONTENT: ${{ secrets.KEY_CONTENT }}
+          BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
+          GIT_URL: ${{ secrets.GIT_URL }}

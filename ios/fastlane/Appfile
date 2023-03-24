@@ -1,4 +1,4 @@
-app_identifier("com.crypto.app.MyApp") # The bundle identifier of your app
+app_identifier(ENV['BUNDLE_IDENTIFIER']) # The bundle identifier of your app
 apple_id("chainapp32@gmail.com") # Your Apple Developer Portal username
 
 itc_team_id("123249772") # App Store Connect Team ID
