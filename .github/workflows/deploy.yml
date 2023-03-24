@@ -7,7 +7,4 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: fastlane beta
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      - run: echo 'Hi ${{ env.EXAMPLE_VARIABLE }}'

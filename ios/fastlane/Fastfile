@@ -12,100 +12,28 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-
 default_platform(:ios)
 
-DEVELOPER_APP_ID = ENV["DEVELOPER_APP_ID"]
-DEVELOPER_APP_IDENTIFIER = ENV["DEVELOPER_APP_IDENTIFIER"]
-PROVISIONING_PROFILE_SPECIFIER = ENV["PROVISIONING_PROFILE_SPECIFIER"]
-TEMP_KEYCHAIN_USER = ENV["TEMP_KEYCHAIN_USER"]
-TEMP_KEYCHAIN_PASSWORD = ENV["TEMP_KEYCHAIN_PASSWORD"]
-APPLE_ISSUER_ID = ENV["APPLE_ISSUER_ID"]
-APPLE_KEY_ID = ENV["APPLE_KEY_ID"]
-APPLE_KEY_CONTENT = ENV["APPLE_KEY_CONTENT"]
-GIT_AUTHORIZATION = ENV["GIT_AUTHORIZATION"]
-
 platform :ios do
+  desc "Push a new beta build to TestFlight"
   lane :beta do
-    setup_ci
-    match(type: 'appstore')
-    build_app
-    upload_to_testflight(skip_waiting_for_build_processing: true)
+    app_store_connect_api_key(
+      key_id: "57B62W4326",
+      issuer_id: "2475be71-6f9d-4231-8933-e9ecfe0eacd8",
+      key_content: "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgKXMYpdXjUq008Ia252ui7QSjH8asoW1Uq63dnVzJvYegCgYIKoZIzj0DAQehRANCAAQywbncaisjVXxmetTqwZhh7xjqNNB4uVJjYJ7SP6qc/2h7LMUcLnzxXsW5G9sgAWw8+dOuHrrBxMxgq1gTswyK\n-----END PRIVATE KEY-----",
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+    sync_code_signing(type: "appstore")    # see code signing guide for more information
+    increment_build_number(xcodeproj: "MyApp.xcodeproj")
+    build_app(
+      workspace: "MyApp.xcworkspace", 
+      scheme: "MyApp",
+      output_directory: "./fastlane" # Destination directory. Defaults to current directory.
+    )
+    upload_to_testflight(
+      ipa: "./fastlane/MyApp.ipa",
+      skip_waiting_for_build_processing: true
+    )
   end
 end
-
-# def delete_temp_keychain(name)
-#   delete_keychain(
-#     name: name
-#   ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
-# end
-
-# def create_temp_keychain(name, password)
-#   create_keychain(
-#     name: name,
-#     password: password,
-#     unlock: false,
-#     timeout: 0
-#   )
-# end
-
-# def ensure_temp_keychain(name, password)
-#   delete_temp_keychain(name)
-#   create_temp_keychain(name, password)
-# end
-
-# platform :ios do
-#   lane :closed_beta do
-#     keychain_name = TEMP_KEYCHAIN_USER
-#     keychain_password = TEMP_KEYCHAIN_PASSWORD
-#     ensure_temp_keychain(keychain_name, keychain_password)
-
-#     api_key = app_store_connect_api_key(
-#       key_id: APPLE_KEY_ID,
-#       issuer_id: APPLE_ISSUER_ID,
-#       key_content: APPLE_KEY_CONTENT,            
-#       duration: 1200,            
-#       in_house: false
-#     )
-    
-#     increment_build_number(xcodeproj: "MyApp.xcodeproj")
-    
-#     cocoapods(
-#       clean_install: true
-#     )
-
-#     match(
-#       type: 'appstore',
-#       app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
-#       git_basic_authorization: Base64.strict_encode64(GIT_AUTHORIZATION),
-#       readonly: true,
-#       keychain_name: keychain_name,
-#       keychain_password: keychain_password,
-#       api_key: api_key
-#     )
-
-#     gym(
-#       configuration: "Release",
-#       workspace: "MyApp.xcworkspace",
-#       scheme: "MyApp",
-#       export_method: "app-store",
-#       export_options: {
-#         provisioningProfiles: { 
-#             DEVELOPER_APP_ID => PROVISIONING_PROFILE_SPECIFIER
-#         }
-#       }
-#     )
-
-#     pilot(
-#       apple_id: "#{DEVELOPER_APP_ID}",
-#       app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
-#       skip_waiting_for_build_processing: true,
-#       skip_submission: true,
-#       distribute_external: false,
-#       notify_external_testers: false,
-#       ipa: "./MyApp.ipa"
-#     )
-
-#     delete_temp_keychain(keychain_name)
-#   end
-# end

@@ -1,12 +1,8 @@
-# app_identifier("com.crypto.app.MyApp") # The bundle identifier of your app
-# apple_id("chainapp32@gmail.com") # Your Apple Developer Portal username
+app_identifier("com.crypto.app.MyApp") # The bundle identifier of your app
+apple_id("chainapp32@gmail.com") # Your Apple Developer Portal username
 
-# itc_team_id("123249772") # App Store Connect Team ID
-# team_id("K969727JC6") # Developer Portal Team ID
+itc_team_id("123249772") # App Store Connect Team ID
+team_id("K969727JC6") # Developer Portal Team ID
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
-app_identifier(ENV["DEVELOPER_APP_IDENTIFIER"])
-apple_id(ENV["FASTLANE_APPLE_ID"])
-itc_team_id(ENV["APP_STORE_CONNECT_TEAM_ID"])
-team_id(ENV["DEVELOPER_PORTAL_TEAM_ID"])
