@@ -7,5 +7,5 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - run: echo 'Hi ${{ env.EXAMPLE_VARIABLE }}'
+      - run: echo 'Hi ${{ vars.EXAMPLE_VARIABLE }}'
       - run: echo 'Hi ${{ secrets.DEVELOPER_APP_IDENTIFIER }}'
