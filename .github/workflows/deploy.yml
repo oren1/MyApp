@@ -7,8 +7,8 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - run: fastlane beta
-      - env:
+       run: fastlane beta
+       env:
           KEY_ID: ${{ secrets.KEY_ID }}
           ISSUER_ID: ${{ secrets.ISSUER_ID }}
           KEY_CONTENT: ${{ secrets.KEY_CONTENT }}
