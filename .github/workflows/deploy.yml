@@ -20,3 +20,4 @@ jobs:
             BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
             GIT_URL: ${{ secrets.GIT_URL }}
             MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
