@@ -53,17 +53,17 @@ const CoinsList = observer(({navigation}: TopListScreenNavigationProp) => {
         <FlatList
           data={store.coinsStore.coinsList}
           renderItem={renderItem}
-          keyExtractor={({id}, index) => id}
+          keyExtractor={({id}, index) => id + index}
           ListFooterComponent={
             <ActivityIndicator style={styles.activityIndicatorBottom} />
           }
+          removeClippedSubviews={true}
           onEndReachedThreshold={0}
           getItemLayout={(data, index) => ({
             length: 75,
             offset: 75 * index,
             index,
           })}
-          maxToRenderPerBatch={20}
           onEndReached={() => {
             store.coinsStore.fetchCoinsList();
             console.log('onEndReached');

@@ -1,37 +1,32 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 interface CoinRowProp {
-  testID: string
+  testID: string;
   coinName: string;
   imageUrl: string;
   onPress: () => void;
 }
 
 const CoinRow = ({onPress, coinName, imageUrl, testID}: CoinRowProp) => {
-  const CoinView = () => {
-    return (
-      <View testID={testID} style={styles.coinRowContainer}>
-        <FastImage source={{uri: imageUrl}} style={{width: 75, height: 75}} />
-
-        <Text style={styles.titleText}>{coinName}</Text>
-      </View>
-    );
-  };
-
   return (
     <TouchableHighlight
       activeOpacity={0.6}
       underlayColor="#DDDDDD"
       onPress={onPress}>
-      <CoinView />
+      <View testID={testID} style={styles.coinRowContainer}>
+        <FastImage source={{uri: imageUrl}} style={{width: 75, height: 75}} />
+
+        <Text style={styles.titleText}>{coinName}</Text>
+      </View>
     </TouchableHighlight>
   );
 };
 
 const styles = StyleSheet.create({
   coinRowContainer: {
+    height: 75,
     margin: 0,
     flexDirection: 'row',
   },
@@ -44,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoinRow
+export default memo(CoinRow);
