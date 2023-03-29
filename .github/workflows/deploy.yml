@@ -21,7 +21,8 @@ jobs:
             ISSUER_ID: ${{ secrets.ISSUER_ID }}
             KEY_CONTENT: ${{ secrets.KEY_CONTENT }}
             BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
+            PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
             GIT_URL: ${{ secrets.GIT_URL }}
             MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-            
+
