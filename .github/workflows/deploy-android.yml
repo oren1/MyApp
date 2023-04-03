@@ -37,4 +37,5 @@ jobs:
           STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS}}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_ALIAS_PASSWORD }}
-          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}   
+          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+             
