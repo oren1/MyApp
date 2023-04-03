@@ -12,7 +12,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-
+      - run: npm ci --legacy-peer-deps
+      - name: install pods
+        run: cd ios && pod install && cd ../  
+        
       - name: Decode Service Account Key JSON File
         uses: timheuer/base64-to-file@v1
         id: service_account_json_file
