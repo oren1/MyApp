@@ -17,7 +17,7 @@ jobs:
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '17'
-          
+
       - run: bundle install
       - run: npm ci --legacy-peer-deps
 
@@ -38,8 +38,8 @@ jobs:
       - name: Build & deploy Android release
         run: cd android && fastlane beta
         env:
-          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
-          STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS}}
-          KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_ALIAS_PASSWORD }}
-          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+          ANDROID_KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS}}
+          ANDROID_KEYSTORE_ALIAS_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_ALIAS_PASSWORD }}
+          ANDROID_SERVICE_ACCOUNT_JSON_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
