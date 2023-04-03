@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import FastImage from 'react-native-fast-image';
 

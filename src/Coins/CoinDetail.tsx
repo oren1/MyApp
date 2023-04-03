@@ -49,7 +49,8 @@ const CoinDetail = ({route}: CoinDetailScreenNavigationProp) => {
             dataSets: [
               {
                 label: 'Coin History',
-                values: data?.listHistory.map(({y}: {y: number}) => y),
+                values: data ? data.listHistory.map(({y}: {y: number}) => y) : [],
+                // values: [],
                 config: {drawCircles: false},
               },
             ],

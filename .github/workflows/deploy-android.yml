@@ -1,0 +1,37 @@
+name: build-and-depoly-android-app
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-and-depoly:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Decode Service Account Key JSON File
+        uses: timheuer/base64-to-file@v1
+        id: service_account_json_file
+        with:
+          fileName: "serviceAccount.json"
+          encodedString: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_FILE }}    
+
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "android_keystore.jks"
+          encodedString: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+
+      - name: Build & deploy Android release
+        run: bundle exec fastlane android deploy
+        env:
+          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS}}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_ALIAS_PASSWORD }}
+          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}   
