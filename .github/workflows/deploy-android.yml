@@ -12,7 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-
+          
+      - run: bundle install
       - run: npm ci --legacy-peer-deps
 
       - name: Decode Service Account Key JSON File
