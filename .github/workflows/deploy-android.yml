@@ -28,7 +28,7 @@ jobs:
           encodedString: ${{ secrets.ANDROID_KEYSTORE_FILE }}
 
       - name: Build & deploy Android release
-        run: bundle exec fastlane android deploy
+        run: bundle exec fastlane bets
         env:
           KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
           STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
