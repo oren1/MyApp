@@ -1,5 +1,5 @@
 import {Point} from '../AwesomeTypes';
-import {Coin} from '../store/CoinsStore/store';
+import {Coin} from '../Store/CoinsStore/store';
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import {queries} from './Queries';
 type Nullable<Type> = Type | null;

@@ -8,9 +8,9 @@
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import CoinDetail from './src/components/coins/CoinDetail';
-import CoinsList from './src/components/coins/CoinsList';
-import NewsFeedScreen from './src/components/news/NewsScreen';
+import CoinDetail from './src/Coins/CoinDetail';
+import CoinsList from './src/Coins/CoinsList';
+import NewsFeedScreen from './src/News/NewsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -18,7 +18,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {RootStackParamList, TabParamList} from './src/NavigationTypes';
 import {ApolloProvider} from '@apollo/client';
-import {client} from './src/network/NetworkManager';
+import {client} from './src/Network/NetworkManager';
 import {Platform} from 'react-native';
 
 /**
