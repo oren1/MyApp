@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import CoinRow from './CoinRow';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {TopListScreenProps} from '../NavigationTypes';
-import {Coin} from '../AwesomeTypes';
+import {TopListScreenProps} from '../../NavigationTypes';
+import {Coin} from '../../AwesomeTypes';
 import {observer} from 'mobx-react-lite';
-import store from '../Store/index';
+import store from '../../store/index';
 
 /**
  * navigation prop
