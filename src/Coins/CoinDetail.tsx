@@ -3,9 +3,8 @@ import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import {LineChart} from 'react-native-charts-wrapper';
 // import {getHistory} from '../Network/NetworkManager';
 import {CoinDetailScreenNavigationProp} from '../NavigationTypes';
-import {Point} from '../AwesomeTypes';
-import {useLazyQuery, useQuery} from '@apollo/client';
-import {queries} from '../Network/Queries';
+import {useLazyQuery} from '@apollo/client';
+import {queries} from '../network/Queries';
 /**
  * 'route' prop
  * the 'route' prop let us receive the params passed from the previous screen. 'route.params'
@@ -14,9 +13,7 @@ import {queries} from '../Network/Queries';
 const CoinDetail = ({route}: CoinDetailScreenNavigationProp) => {
   const {symbol} = route.params;
 
-  const [getHistory, {loading, error, data}] = useLazyQuery(
-    queries.GET_HISTORY,
-  );
+  const [getHistory, {loading, data}] = useLazyQuery(queries.GET_HISTORY);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,9 +32,7 @@ const CoinDetail = ({route}: CoinDetailScreenNavigationProp) => {
   }, [getHistory, symbol]);
 
   return (
-    <View
-    testID={'CoinDetail'}
-    style={styles.container}>
+    <View testID={'CoinDetail'} style={styles.container}>
       {loading ? (
         <ActivityIndicator style={styles.activityIndicator} size="small" />
       ) : (
@@ -49,7 +44,9 @@ const CoinDetail = ({route}: CoinDetailScreenNavigationProp) => {
             dataSets: [
               {
                 label: 'Coin History',
-                values: data ? data.listHistory.map(({y}: {y: number}) => y) : [],
+                values: data
+                  ? data.listHistory.map(({y}: {y: number}) => y)
+                  : [],
                 // values: [],
                 config: {drawCircles: false},
               },

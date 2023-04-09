@@ -1,12 +1,6 @@
-import {Point} from '../AwesomeTypes';
 import {Coin} from '../Store/CoinsStore/store';
-import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
+import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {queries} from './Queries';
-type Nullable<Type> = Type | null;
-type GetHistoryCallback = (
-  points: Nullable<Point[]>,
-  error: Nullable<Error>,
-) => void;
 
 export const client = new ApolloClient({
   uri: 'https://5142s291u6.execute-api.us-east-1.amazonaws.com/',

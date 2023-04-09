@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import CoinRow from './CoinRow';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {TopListScreenProps} from '../NavigationTypes';
 import {Coin} from '../AwesomeTypes';
 import {observer} from 'mobx-react-lite';
-import store from '../Store/index';
+import store from '../store/index';
 
 /**
  * navigation prop
@@ -41,8 +40,7 @@ const CoinsList = observer(({navigation}: TopListScreenProps) => {
   };
 
   return (
-    <View testID={'CoinList'}
-      style={{flex: 1, backgroundColor: 'white'}}>
+    <View testID={'CoinList'} style={styles.container}>
       {store.coinsStore.isCoinListLoading && store.coinsStore.page === 0 ? (
         <ActivityIndicator
           size="large"
@@ -74,6 +72,10 @@ const CoinsList = observer(({navigation}: TopListScreenProps) => {
 });
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   activityIndicatorFullScreen: {
     flex: 1,
   },

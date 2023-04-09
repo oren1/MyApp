@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
@@ -16,7 +16,7 @@ const CoinRow = ({onPress, coinName, imageUrl, testID}: CoinRowProp) => {
       underlayColor="#DDDDDD"
       onPress={onPress}>
       <View testID={testID} style={styles.coinRowContainer}>
-        <FastImage source={{uri: imageUrl}} style={{width: 75, height: 75}} />
+        <FastImage source={{uri: imageUrl}} style={styles.image} />
 
         <Text style={styles.titleText}>{coinName}</Text>
       </View>
@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 20,
     fontWeight: '500',
+  },
+  image: {
+    width: 75,
+    height: 75,
   },
 });
 
