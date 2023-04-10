@@ -7,7 +7,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const getCoinsForPage = async (page = 0): Promise<Coin[]> => {
+export const getCoinsForPage = async (page = 0): Promise<Coin[]> => {
   const result = await client.query({
     query: queries.GET_COINS,
     variables: {
@@ -17,7 +17,7 @@ const getCoinsForPage = async (page = 0): Promise<Coin[]> => {
   return result.data.listCoins;
 };
 
-const getHistory = async (fsym: string, tsym: string) => {
+export const getHistory = async (fsym: string, tsym: string) => {
   // try {
   let limit = (90 * 24) / 10;
   const result = await client.query({
@@ -45,5 +45,3 @@ const getHistory = async (fsym: string, tsym: string) => {
   //   callback(null, error as Error);
   // // }
 };
-
-export {getCoinsForPage, getHistory};
