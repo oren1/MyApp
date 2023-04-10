@@ -19,22 +19,23 @@ jobs:
           java-version: '17'
 
       - run: bundle install
+      - run: npx react-native bundle
       - run: npm ci --legacy-peer-deps
 
       - name: Decode Service Account Key JSON File
         uses: timheuer/base64-to-file@v1
         id: service_account_json_file
         with:
-          fileName: "serviceAccount.json"
-          encodedString: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_FILE }}    
+          fileName: 'serviceAccount.json'
+          encodedString: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON_FILE }}
 
       - name: Decode Keystore File
         uses: timheuer/base64-to-file@v1
         id: android_keystore
         with:
-          fileName: "android_keystore.jks"
+          fileName: 'android_keystore.jks'
           encodedString: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-
+      - run: gradlew clean
       - name: Build & deploy Android release
         run: cd android && fastlane beta
         env:
