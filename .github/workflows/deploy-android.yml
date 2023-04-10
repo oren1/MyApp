@@ -35,7 +35,6 @@ jobs:
         with:
           fileName: 'android_keystore.jks'
           encodedString: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-      - run: cd android && gradlew clean && cd ../
       - name: Build & deploy Android release
         run: cd android && fastlane beta
         env:
