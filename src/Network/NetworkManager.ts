@@ -1,5 +1,6 @@
+import {Point} from '../AwesomeTypes';
 import {Coin} from '../store/CoinsStore/store';
-import {ApolloClient, InMemoryCache} from '@apollo/client';
+import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import {queries} from './Queries';
 
 export const client = new ApolloClient({
