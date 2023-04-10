@@ -1,4 +1,4 @@
-import {Coin} from '../Store/CoinsStore/store';
+import {Coin} from '../store/CoinsStore/store';
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {queries} from './Queries';
 
