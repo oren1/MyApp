@@ -10,7 +10,7 @@ import {Coin} from './AwesomeTypes';
  * This will provide type checking and intelliSense for props of the Navigator and Screen components.
  * */
 export type RootStackParamList = {
-  MyTabs: undefined;
+  TopList: undefined;
   CoinDetail: Coin;
 };
 

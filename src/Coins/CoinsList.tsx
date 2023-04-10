@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import CoinRow from './CoinRow';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {TopListScreenProps} from '../NavigationTypes';
+import {TopListScreenNavigationProp} from '../NavigationTypes';
 import {Coin} from '../AwesomeTypes';
 import {observer} from 'mobx-react-lite';
 import store from '../Store/index';
@@ -12,7 +12,7 @@ import store from '../Store/index';
  * the navigation prop is passed in to every screen component in the native stack navigator
  */
 
-const CoinsList = observer(({navigation}: TopListScreenProps) => {
+const CoinsList = observer(({navigation}: TopListScreenNavigationProp) => {
   useEffect(() => {
     store.coinsStore.fetchCoinsList();
   }, []);
@@ -68,7 +68,7 @@ const CoinsList = observer(({navigation}: TopListScreenProps) => {
           }}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 });
 
