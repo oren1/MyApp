@@ -5,7 +5,7 @@ import {LineChart} from 'react-native-charts-wrapper';
 import {CoinDetailScreenNavigationProp} from '../NavigationTypes';
 import {Point} from '../AwesomeTypes';
 import {useLazyQuery, useQuery} from '@apollo/client';
-import {queries} from '../Network/Queries';
+import {queries} from '../network/Queries';
 /**
  * 'route' prop
  * the 'route' prop let us receive the params passed from the previous screen. 'route.params'

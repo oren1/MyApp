@@ -15,7 +15,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {RootStackParamList} from './src/NavigationTypes';
 import {ApolloProvider} from '@apollo/client';
-import {client} from './src/Network/NetworkManager';
+import {client} from './src/network/NetworkManager';
 /**
  * 'createNativeStackNavigator'
  * returns an object containing two properties: 'Navigator' and 'Screen'.

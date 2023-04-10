@@ -1,28 +1,29 @@
 name: build-ios-app
 on:
   push:
-    branches:
-      - 'main'
+    branches-ignore:
+      - main
+    # branches:
+    #   - 'main'
 jobs:
   build:
     runs-on: macos-latest
     steps:
-       - uses: actions/checkout@v3
-       - uses: actions/setup-node@v3
-         with:
-           node-version: '16'
-       - run: npm ci --legacy-peer-deps
-       - name: install pods
-         run: cd ios && pod install && cd ../    
-       - name: upload to testflight 
-         run: cd ios && fastlane beta
-         env:
-            KEY_ID: ${{ secrets.KEY_ID }}
-            ISSUER_ID: ${{ secrets.ISSUER_ID }}
-            KEY_CONTENT: ${{ secrets.KEY_CONTENT }}
-            BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
-            PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
-            GIT_URL: ${{ secrets.GIT_URL }}
-            MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-            MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: npm ci --legacy-peer-deps
+      - name: install pods
+        run: cd ios && pod install && cd ../
+      - name: upload to testflight
+        run: cd ios && fastlane beta
+        env:
+          KEY_ID: ${{ secrets.KEY_ID }}
+          ISSUER_ID: ${{ secrets.ISSUER_ID }}
+          KEY_CONTENT: ${{ secrets.KEY_CONTENT }}
+          BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
+          PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
+          GIT_URL: ${{ secrets.GIT_URL }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
