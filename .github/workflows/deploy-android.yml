@@ -19,7 +19,6 @@ jobs:
           java-version: '17'
 
       - run: bundle install
-      - run: npx react-native bundle
       - run: npm ci --legacy-peer-deps
 
       - name: Decode Service Account Key JSON File
