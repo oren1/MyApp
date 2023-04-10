@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from 'mobx';
-import {getCoinsForPage} from '../../network/NetworkManager';
+import {getCoinsForPage} from '../../Network/NetworkManager';
 
 export type Coin = {
   id: string;

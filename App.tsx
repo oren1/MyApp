@@ -16,7 +16,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {RootStackParamList, TabParamList} from './src/NavigationTypes';
 import {ApolloProvider} from '@apollo/client';
-import {client} from './src/network/NetworkManager';
+import {client} from './src/Network/NetworkManager';
 import {Platform} from 'react-native';
 
 /**
