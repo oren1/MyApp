@@ -5,6 +5,7 @@ import {TopListScreenProps} from '../NavigationTypes';
 import {Coin} from '../AwesomeTypes';
 import {observer} from 'mobx-react-lite';
 import store from '../store/index';
+import {getMoreCoins} from '../store/CoinsStore/actions';
 
 /**
  * navigation prop
@@ -13,7 +14,7 @@ import store from '../store/index';
 
 const CoinsList = observer(({navigation}: TopListScreenProps) => {
   useEffect(() => {
-    store.coinsStore.fetchCoinsList();
+    getMoreCoins();
   }, []);
 
   function showDetails(index: number) {
@@ -62,7 +63,7 @@ const CoinsList = observer(({navigation}: TopListScreenProps) => {
             index,
           })}
           onEndReached={() => {
-            store.coinsStore.fetchCoinsList();
+            getMoreCoins();
             console.log('onEndReached');
           }}
         />
