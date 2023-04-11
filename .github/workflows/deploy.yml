@@ -1,10 +1,10 @@
 name: build-ios-app
 on:
   push:
-    branches-ignore:
-      - main
-    # branches:
-    #   - 'main'
+    # branches-ignore:
+    #   - main
+    branches:
+      - 'main'
 jobs:
   build:
     runs-on: macos-latest
