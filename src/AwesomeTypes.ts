@@ -46,3 +46,8 @@ export type GetHistoryCallback = (
   points: Nullable<Point[]>,
   error: Nullable<Error>,
 ) => void;
+
+export type SomeType = {
+  varOne: string;
+  varTwo: number;
+};
