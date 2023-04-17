@@ -1,9 +1,14 @@
 name: build-and-test
 run-name: ${{ github.actor }} building and testing
-on: 
+on:
   push:
-    branches-ignore:
+    # branches-ignore:
+    #   - 'main'
+    branches:
       - 'main'
+    env:
+      NITRO_API_KEY: ${{ secrets.NITRO_API_KEY }}
+
 jobs:
   check-bats-version:
     runs-on: macos-latest
@@ -20,13 +25,13 @@ jobs:
           path: ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pods-  
-            
+            ${{ runner.os }}-pods-
+
       - run: npm ci --legacy-peer-deps
       - run: npm install detox-cli --global
       - run: brew tap wix/brew
       - run: brew install applesimutils
-      - run: "npm install react-native-cli --global"
+      - run: 'npm install react-native-cli --global'
       - run: npm install "jest@^29" --save-dev --legacy-peer-deps
       - run: npm install detox --save-dev --legacy-peer-deps
       - run: xcrun simctl list
@@ -34,9 +39,11 @@ jobs:
       - name: install pods
         if: steps.cache-cocoapods.outputs.cache-hit != 'true'
         run: cd ios && pod install && cd ../
-        
-            
+
       # - run: npx react-native start &
       - run: xcrun simctl list
-      - run: detox build --configuration ios.sim.release
+      # - run: detox build --configuration ios.sim.release
+      uses: nitro-build/github-action-nitro-ios@v1
+        with:
+          detox-configuration: ios.sim.release
       - run: export MY_APP_MODE=mocked && detox test --configuration ios.sim.release --cleanup
