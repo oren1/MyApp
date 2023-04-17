@@ -43,7 +43,7 @@ jobs:
       # - run: npx react-native start &
       - run: xcrun simctl list
       # - run: detox build --configuration ios.sim.release
-      uses: nitro-build/github-action-nitro-ios@v1
-        with:
-          detox-configuration: ios.sim.release
+        uses: nitro-build/github-action-nitro-ios@v1
+          with:
+            detox-configuration: ios.sim.release
       - run: export MY_APP_MODE=mocked && detox test --configuration ios.sim.release --cleanup
