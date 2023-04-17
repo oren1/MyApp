@@ -18,6 +18,8 @@ import {RootStackParamList, TabParamList} from './src/NavigationTypes';
 import {ApolloProvider} from '@apollo/client';
 import {client} from './src/network/NetworkManager';
 import {Platform} from 'react-native';
+import GesturesExample from './src/gesture_example/gesturesExample';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 /**
  * 'createNativeStackNavigator'
@@ -49,6 +51,11 @@ function MyTabs() {
           component={NewsFeedScreen}
           options={{title: 'News Feed'}}
         />
+        <Tab.Screen
+          name="GestureScreen"
+          component={GesturesExample}
+          options={{title: 'Gesture Example'}}
+        />
       </Tab.Navigator>
     );
   } else {
@@ -64,6 +71,11 @@ function MyTabs() {
           component={NewsFeedScreen}
           options={{title: 'News Feed'}}
         />
+        <Tab.Screen
+          name="GestureScreen"
+          component={GesturesExample}
+          options={{title: 'Gesture Example'}}
+        />
       </MaterialTab.Navigator>
     );
   }
@@ -71,28 +83,30 @@ function MyTabs() {
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="MyTabs" // sets the 'TopList' to be render first in the navigation
-          screenOptions={{headerTransparent: false}} // 'screenOptions' sets options for all screens in the navigator, in case
-          //we want the same options for everyone.
-        >
-          <Stack.Screen
-            name="MyTabs"
-            component={MyTabs}
-            options={{headerShown: false}} // don't show the parent header, only the child
-          />
-          <Stack.Screen
-            name="CoinDetail"
-            component={CoinDetail}
-            options={({route}) => ({
-              title: route.params?.coinName,
-            })}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ApolloProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="MyTabs" // sets the 'TopList' to be render first in the navigation
+            screenOptions={{headerTransparent: false}} // 'screenOptions' sets options for all screens in the navigator, in case
+            //we want the same options for everyone.
+          >
+            <Stack.Screen
+              name="MyTabs"
+              component={MyTabs}
+              options={{headerShown: false}} // don't show the parent header, only the child
+            />
+            <Stack.Screen
+              name="CoinDetail"
+              component={CoinDetail}
+              options={({route}) => ({
+                title: route.params?.coinName,
+              })}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ApolloProvider>
+    </GestureHandlerRootView>
   );
 };
 

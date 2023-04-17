@@ -18,7 +18,7 @@ export default class CoinsStore {
   }
 
   setIsCoinListLoading(isLoding: boolean) {
-    this.isCoinHistoryLoding = isLoding;
+    this.isCoinListLoading = isLoding;
   }
   updateCoins(coins: Coin[]) {
     /*

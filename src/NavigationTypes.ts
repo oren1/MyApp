@@ -17,6 +17,7 @@ export type RootStackParamList = {
 export type TabParamList = {
   TopList: undefined;
   NewsFeed: undefined;
+  GestureScreen: undefined;
 };
 
 /** NativeStackScreenProps
@@ -29,6 +30,11 @@ export type TabParamList = {
  "bubble up" is this: when the nested navigator can't handle some call then the parent navigator handles it. */
 export type TopListScreenProps = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, 'TopList'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
+export type GestureExampleProps = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, 'GestureScreen'>,
   NativeStackScreenProps<RootStackParamList>
 >;
 

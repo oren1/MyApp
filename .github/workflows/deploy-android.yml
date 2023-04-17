@@ -2,7 +2,9 @@ name: build-and-depoly-android-app
 on:
   workflow_dispatch:
   push:
-    branches:
+    # branches:
+    #   - 'main'
+    branches-ignore:
       - 'main'
 jobs:
   build-and-depoly:
