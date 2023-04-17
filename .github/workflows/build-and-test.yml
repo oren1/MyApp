@@ -36,9 +36,9 @@ jobs:
       - run: npm install detox --save-dev --legacy-peer-deps
       - run: xcrun simctl list
 
-      - name: install pods
-        if: steps.cache-cocoapods.outputs.cache-hit != 'true'
-        run: cd ios && pod install && cd ../
+      # - name: install pods
+      #   if: steps.cache-cocoapods.outputs.cache-hit != 'true'
+      #   run: cd ios && pod install && cd ../
 
       # - run: npx react-native start &
       - run: xcrun simctl list
