@@ -6,12 +6,12 @@ on:
     #   - 'main'
     branches:
       - 'main'
-    env:
-      NITRO_API_KEY: ${{ secrets.NITRO_API_KEY }}
 
 jobs:
   check-bats-version:
     runs-on: macos-latest
+    env:
+      NITRO_API_KEY: ${{ secrets.NITRO_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
